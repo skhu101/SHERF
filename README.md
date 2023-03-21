@@ -17,7 +17,7 @@
     <sup>*</sup>corresponding author&emsp; <sup>✉</sup>corresponding author
 </div>
 
-<strong>SHERF learns a Generalizable Human NeRF to recover 3D animatable humans from a single image.</strong>
+<strong>SHERF learns a Generalizable Human NeRF to animate 3D humans from a single image.</strong>
 
 
 ## :newspaper_roll: License
