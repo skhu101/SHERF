@@ -24,7 +24,7 @@
     <em>Figure 1. <strong>SHERF is a single image-based generalizable Human NeRF.</strong> With just one inference pass on a single image, SHERF reconstructs Human NeRF in the canonical space which can be driven and rendered for novel view and pose synthesis.</em>
 </div>
 
-:open_book: For more visual results, go checkout our <a href="https://skhu101.github.io/SHERF-ProjectPage/" target="_blank">project page</a>
+:open_book: For more visual results, go checkout our <a href="https://skhu101.github.io/SHERF" target="_blank">project page</a>
 
 This repository will contain the official implementation of _SHERF: Generalizable Human NeRF from a Single Image_.
 
