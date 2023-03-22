@@ -14,12 +14,23 @@
     <sup>1</sup>S-Lab, Nanyang Technological University&emsp; <sup>2</sup>Sensetime Research
 </div>
 <div>
-    <sup>*</sup>corresponding author&emsp; <sup>✉</sup>corresponding author
+    <sup>*</sup>Equal Contribution&emsp; <sup>✉</sup>Corresponding Author
 </div>
 
 <strong>SHERF learns a Generalizable Human NeRF to animate 3D humans from a single image.</strong>
+
+<div style="width: 70%; text-align: center; margin:auto;">
+    <img style="width:100%" src="img/SHERF_teaser.png">
+    <em>Figure 1. <strong>SHERF is a single image-based generalizable Human NeRF.</strong> With just one inference pass on a single image, SHERF reconstructs Human NeRF in the canonical space which can be driven and rendered for novel view and pose synthesis.</em>
+</div>
+
+:open_book: For more visual results, go checkout our <a href="https://skhu101.github.io/SHERF-ProjectPage/" target="_blank">project page</a>
+
+This repository will contain the official implementation of _SHERF: Generalizable Human NeRF from a Single Image_.
 
 
 ## :newspaper_roll: License
 
 Distributed under the S-Lab License. See `LICENSE` for more information.
+
+
