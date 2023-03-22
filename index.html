@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://hongfz16.github.io/projects/SHERF.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Garment4D">
+    <meta name="google-site-verification" content="FzAJM_4azDmgt5qXJBAUDAx332xVDar5iPZyD48YJug">
+
+    <title>SHERF - Project Page</title>
+
+    <link rel="stylesheet" href="./SHERF - Project Page_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./SHERF - Project Page_files/all.min.css">
+    <link rel="stylesheet" href="./SHERF - Project Page_files/academicons.min.css">
+    <link rel="stylesheet" href="./SHERF - Project Page_files/charts.min.css">
+    <link id="theme-style" rel="stylesheet" href="./SHERF - Project Page_files/avatarclip_main.css">
+    <link id="theme-style" rel="stylesheet" href="./SHERF - Project Page_files/bulma-carousel.min.css">
+    <link id="theme-style" rel="stylesheet" href="./SHERF - Project Page_files/bulma-slider.min.css">
+
+    
+    <!-- Global site tag (gtag.js) - Google Analytics
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '');
+    </script> -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async="" src="./SHERF - Project Page_files/js"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-7G7KG5PND3');
+    </script>
+    
+
+    
+
+    <!-- <script type="module" src="/assets/js/background_box.js"></script> -->
+    <script type="module" src="./SHERF - Project Page_files/background_star.js"></script>
+    <script src="./SHERF - Project Page_files/jquery.min.js"></script>
+    <script src="./SHERF - Project Page_files/bulma-carousel.min.js"></script>
+    <script src="./SHERF - Project Page_files/bulma-slider.min.js"></script>
+    <script src="./SHERF - Project Page_files/index.js"></script>
+    <script src="./SHERF - Project Page_files/libgif.js"></script>
+    <script type="module" src="./SHERF - Project Page_files/model-viewer.min.js"></script>
+    <!-- <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=T0swBrkINNMN4hmUe4Abwtn7r1IeHosGlOhfqmAHEIY"></script> -->
+
+    <script>
+        function initComparisons() {
+            var x, i;
+            /* Find all elements with an "overlay" class: */
+            x = document.getElementsByClassName("img-comp-overlay");
+            for (i = 0; i < x.length; i++) {
+                /* Once for each "overlay" element:
+                pass the "overlay" element as a parameter when executing the compareImages function: */
+                compareImages(x[i]);
+            }
+            function compareImages(img) {
+                var slider, img, clicked = 0, w, h;
+                /* Get the width and height of the img element */
+                w = img.offsetWidth;
+                h = img.offsetHeight;
+                /* Set the width of the img element to 50%: */
+                img.style.width = (w / 2) + "px";
+                /* Create slider: */
+                slider = document.createElement("DIV");
+                slider.setAttribute("class", "img-comp-slider");
+                /* Insert slider */
+                img.parentElement.insertBefore(slider, img);
+                /* Position the slider in the middle: */
+                slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+                slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+                /* Execute a function when the mouse button is pressed: */
+                slider.addEventListener("mousedown", slideReady);
+                /* And another function when the mouse button is released: */
+                window.addEventListener("mouseup", slideFinish);
+                /* Or touched (for touch screens: */
+                slider.addEventListener("touchstart", slideReady);
+                /* And released (for touch screens: */
+                window.addEventListener("touchend", slideFinish);
+                function slideReady(e) {
+                /* Prevent any other actions that may occur when moving over the image: */
+                e.preventDefault();
+                /* The slider is now clicked and ready to move: */
+                clicked = 1;
+                /* Execute a function when the slider is moved: */
+                window.addEventListener("mousemove", slideMove);
+                window.addEventListener("touchmove", slideMove);
+                }
+                function slideFinish() {
+                /* The slider is no longer clicked: */
+                clicked = 0;
+                }
+                function slideMove(e) {
+                var pos;
+                /* If the slider is no longer clicked, exit this function: */
+                if (clicked == 0) return false;
+                /* Get the cursor's x position: */
+                pos = getCursorPos(e)
+                /* Prevent the slider from being positioned outside the image: */
+                if (pos < 0) pos = 0;
+                if (pos > w) pos = w;
+                /* Execute a function that will resize the overlay image according to the cursor: */
+                slide(pos);
+                }
+                function getCursorPos(e) {
+                var a, x = 0;
+                e = (e.changedTouches) ? e.changedTouches[0] : e;
+                /* Get the x positions of the image: */
+                a = img.getBoundingClientRect();
+                /* Calculate the cursor's x coordinate, relative to the image: */
+                x = e.pageX - a.left;
+                /* Consider any page scrolling: */
+                x = x - window.pageXOffset;
+                return x;
+                }
+                function slide(x) {
+                /* Resize the image: */
+                img.style.width = x + "px";
+                /* Position the slider: */
+                slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+                }
+            }
+        }
+    </script>
+<style type="text/css">.dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid #2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear;border:0;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:#000}.dg.main .close-button.close-top{position:relative}.dg.main .close-button.close-bottom{position:absolute}.dg.main .close-button:hover{background-color:#111}.dg.a{float:right;margin-right:15px;overflow-y:visible}.dg.a.has-save>ul.close-top{margin-top:0}.dg.a.has-save>ul.close-bottom{margin-top:27px}.dg.a.has-save>ul.closed{margin-top:0}.dg.a .save-row{top:0;z-index:1002}.dg.a .save-row.close-top{position:relative}.dg.a .save-row.close-bottom{position:fixed}.dg li{-webkit-transition:height .1s ease-out;-o-transition:height .1s ease-out;-moz-transition:height .1s ease-out;transition:height .1s ease-out;-webkit-transition:overflow .1s linear;-o-transition:overflow .1s linear;-moz-transition:overflow .1s linear;transition:overflow .1s linear}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li>*{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px;overflow:hidden}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .c{float:left;width:60%;position:relative}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:7px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .cr.color{overflow:visible}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:#222;width:460px;padding:15px;font-size:13px;line-height:15px}#dg-new-constructor{padding:10px;color:#222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px #888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}#dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:#333;padding:8px;margin-top:10px}#dg-local-explain code{font-size:10px}#dat-gui-save-locally{display:none}.dg{color:#eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 #111}.dg.main::-webkit-scrollbar{width:5px;background:#1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:#676767}.dg li:not(.folder){background:#1a1a1a;border-bottom:1px solid #2c2c2c}.dg li.save-row{line-height:25px;background:#dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:#c5bdad;color:#fff;text-shadow:0 1px 0 #b0a58f;box-shadow:0 -1px 0 #b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:#c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:#bab19e;box-shadow:0 -1px 0 #b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:#000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid #806787}.dg .cr.color{border-left:3px solid}.dg .cr.function{border-left:3px solid #e61d5f}.dg .cr.number{border-left:3px solid #2FA1D6}.dg .cr.number input[type=text]{color:#2FA1D6}.dg .cr.string{border-left:3px solid #1ed36f}.dg .cr.string input[type=text]{color:#1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:#111}.dg .c input[type=text]{background:#303030;outline:none}.dg .c input[type=text]:hover{background:#3c3c3c}.dg .c input[type=text]:focus{background:#494949;color:#fff}.dg .c .slider{background:#303030;cursor:ew-resize}.dg .c .slider-fg{background:#2FA1D6;max-width:100%}.dg .c .slider:hover{background:#3c3c3c}.dg .c .slider:hover .slider-fg{background:#44abda}
+</style><style type="text/css">.dg ul{list-style:none;margin:0;padding:0;width:100%;clear:both}.dg.ac{position:fixed;top:0;left:0;right:0;height:0;z-index:0}.dg:not(.ac) .main{overflow:hidden}.dg.main{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear}.dg.main.taller-than-window{overflow-y:auto}.dg.main.taller-than-window .close-button{opacity:1;margin-top:-1px;border-top:1px solid #2c2c2c}.dg.main ul.closed .close-button{opacity:1 !important}.dg.main:hover .close-button,.dg.main .close-button.drag{opacity:1}.dg.main .close-button{-webkit-transition:opacity .1s linear;-o-transition:opacity .1s linear;-moz-transition:opacity .1s linear;transition:opacity .1s linear;border:0;line-height:19px;height:20px;cursor:pointer;text-align:center;background-color:#000}.dg.main .close-button.close-top{position:relative}.dg.main .close-button.close-bottom{position:absolute}.dg.main .close-button:hover{background-color:#111}.dg.a{float:right;margin-right:15px;overflow-y:visible}.dg.a.has-save>ul.close-top{margin-top:0}.dg.a.has-save>ul.close-bottom{margin-top:27px}.dg.a.has-save>ul.closed{margin-top:0}.dg.a .save-row{top:0;z-index:1002}.dg.a .save-row.close-top{position:relative}.dg.a .save-row.close-bottom{position:fixed}.dg li{-webkit-transition:height .1s ease-out;-o-transition:height .1s ease-out;-moz-transition:height .1s ease-out;transition:height .1s ease-out;-webkit-transition:overflow .1s linear;-o-transition:overflow .1s linear;-moz-transition:overflow .1s linear;transition:overflow .1s linear}.dg li:not(.folder){cursor:auto;height:27px;line-height:27px;padding:0 4px 0 5px}.dg li.folder{padding:0;border-left:4px solid rgba(0,0,0,0)}.dg li.title{cursor:pointer;margin-left:-4px}.dg .closed li:not(.title),.dg .closed ul li,.dg .closed ul li>*{height:0;overflow:hidden;border:0}.dg .cr{clear:both;padding-left:3px;height:27px;overflow:hidden}.dg .property-name{cursor:default;float:left;clear:left;width:40%;overflow:hidden;text-overflow:ellipsis}.dg .c{float:left;width:60%;position:relative}.dg .c input[type=text]{border:0;margin-top:4px;padding:3px;width:100%;float:right}.dg .has-slider input[type=text]{width:30%;margin-left:0}.dg .slider{float:left;width:66%;margin-left:-5px;margin-right:0;height:19px;margin-top:4px}.dg .slider-fg{height:100%}.dg .c input[type=checkbox]{margin-top:7px}.dg .c select{margin-top:5px}.dg .cr.function,.dg .cr.function .property-name,.dg .cr.function *,.dg .cr.boolean,.dg .cr.boolean *{cursor:pointer}.dg .cr.color{overflow:visible}.dg .selector{display:none;position:absolute;margin-left:-9px;margin-top:23px;z-index:10}.dg .c:hover .selector,.dg .selector.drag{display:block}.dg li.save-row{padding:0}.dg li.save-row .button{display:inline-block;padding:0px 6px}.dg.dialogue{background-color:#222;width:460px;padding:15px;font-size:13px;line-height:15px}#dg-new-constructor{padding:10px;color:#222;font-family:Monaco, monospace;font-size:10px;border:0;resize:none;box-shadow:inset 1px 1px 1px #888;word-wrap:break-word;margin:12px 0;display:block;width:440px;overflow-y:scroll;height:100px;position:relative}#dg-local-explain{display:none;font-size:11px;line-height:17px;border-radius:3px;background-color:#333;padding:8px;margin-top:10px}#dg-local-explain code{font-size:10px}#dat-gui-save-locally{display:none}.dg{color:#eee;font:11px 'Lucida Grande', sans-serif;text-shadow:0 -1px 0 #111}.dg.main::-webkit-scrollbar{width:5px;background:#1a1a1a}.dg.main::-webkit-scrollbar-corner{height:0;display:none}.dg.main::-webkit-scrollbar-thumb{border-radius:5px;background:#676767}.dg li:not(.folder){background:#1a1a1a;border-bottom:1px solid #2c2c2c}.dg li.save-row{line-height:25px;background:#dad5cb;border:0}.dg li.save-row select{margin-left:5px;width:108px}.dg li.save-row .button{margin-left:5px;margin-top:1px;border-radius:2px;font-size:9px;line-height:7px;padding:4px 4px 5px 4px;background:#c5bdad;color:#fff;text-shadow:0 1px 0 #b0a58f;box-shadow:0 -1px 0 #b0a58f;cursor:pointer}.dg li.save-row .button.gears{background:#c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;height:7px;width:8px}.dg li.save-row .button:hover{background-color:#bab19e;box-shadow:0 -1px 0 #b0a58f}.dg li.folder{border-bottom:0}.dg li.title{padding-left:16px;background:#000 url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.2)}.dg .closed li.title{background-image:url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==)}.dg .cr.boolean{border-left:3px solid #806787}.dg .cr.color{border-left:3px solid}.dg .cr.function{border-left:3px solid #e61d5f}.dg .cr.number{border-left:3px solid #2FA1D6}.dg .cr.number input[type=text]{color:#2FA1D6}.dg .cr.string{border-left:3px solid #1ed36f}.dg .cr.string input[type=text]{color:#1ed36f}.dg .cr.function:hover,.dg .cr.boolean:hover{background:#111}.dg .c input[type=text]{background:#303030;outline:none}.dg .c input[type=text]:hover{background:#3c3c3c}.dg .c input[type=text]:focus{background:#494949;color:#fff}.dg .c .slider{background:#303030;cursor:ew-resize}.dg .c .slider-fg{background:#2FA1D6;max-width:100%}.dg .c .slider:hover{background:#3c3c3c}.dg .c .slider:hover .slider-fg{background:#44abda}
+</style></head>
+
+<body>
+
+
+
+
+
+<div class="wrapper">
+
+    <section class="section intro-section">
+        <div class="intro-container" style="text-align: center;">
+            <div class="header">
+                <h3 class="papername">SHERF: Generalizable Human NeRF from a Single Image</h3>
+            </div>
+            <ul class="list-unstyled name-list">
+                <li><a href="https://skhu101.github.io" target="_blank">Shoukang Hu*<sup>1</sup></a></li>
+                <li><a href="https://hongfz16.github.io/" target="_blank">Fangzhou Hong*<sup>1</sup></a></li>
+                <li><a href="https://scholar.google.com/citations?user=lSDISOcAAAAJ" target="_blank">Liang Pan<sup>1</sup></a></li>
+                <li>Haiyi Mei<sup>2</sup></li>
+                <li><a href="https://scholar.google.com.hk/citations?user=jZH2IPYAAAAJ&hl=en" target="_blank">Lei Yang<sup>2</sup></a></li>
+                <li><a href="https://liuziwei7.github.io/" target="_blank">Ziwei Liu</a>✉<sup>1</sup></li>
+            </ul>
+            <ul class="list-unstyled name-list">
+                <li><sup>1</sup>S-Lab, Nanyang Technological University </li>
+                <li><sup>2</sup>Sensetime Research</li>
+            </ul>
+            <ul class="list-unstyled name-list">
+                <li>*Equal Contribution</li>
+                <li>✉Corresponding Author</li>
+            </ul>
+            <!-- <div class="title">ICLR 2023 <strong style="color:red">Spotlight</strong></div> -->
+            <div style="font-size:large;"><strong>TL;DR:</strong> SHERF learns a Generalizable Human NeRF to animate 3D humans from a single image.</div>
+        </div>
+
+        <div id="carouselExampleIndicators" class="video-container" style="margin-top:20px;">
+            <div id="results-carousel" class="carousel is-dark results-carousel video-container-inner">
+            <!-- <div id="sliderc834ec37-cfa0-4e76-a45d-a7fab51cb81e" class="slider" tabindex="0" style="margin-bottom: 25px;"> -->
+    <!-- <div class="slider-container" style="opacity: 1; width: 9669px; transition: all 300ms ease 0s; transform: translate3d(-3223px, 0px, 0px);"><div class="slider-item" data-slider-index="-5" data-cloned="true" style="width: 293px;"> -->
+        <div style="width: 100%; text-align: center;">
+            <img style="width:100%" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000746_frame0002_view0000_gt.png">
+            <p style="width: 100%; text-align: center; margin-top: 5pt">input image</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000746_motion_1.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 1</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000746_motion_2.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 2</p>
+        </div>
+        <div style="width: 100%; text-align: center; margin:auto;">
+            <img style="width:100%" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000722_frame0002_view0000_gt.png">
+            <p style="width: 100%; text-align: center; margin-top: 5pt">input image</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000722_motion_1.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 1</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000722_motion_2.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 2</p>
+        </div>
+        <div style="width: 100%; text-align: center; margin:auto;">
+            <img style="width:100%" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000723_frame0002_view0000_gt.png">
+            <p style="width: 100%; text-align: center; margin-top: 5pt">input image</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000723_motion_1.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 1</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000723_motion_2.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 2</p>
+        </div>
+        <div style="width: 100%; text-align: center; margin:auto;">
+            <img style="width:100%" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000743_frame0002_view0000_gt.png">
+            <p style="width: 100%; text-align: center; margin-top: 5pt">input image</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000743_motion_1.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 1</p>
+        </div>
+        <div class="video item">
+            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                <source src="./SHERF - Project Page_files/SHERF_vis/motion/seq_000743_motion_2.mp4" type="video/mp4">
+            </video>
+            <p style="width: 100%; text-align: center">motion seq 2</p>
+        </div>
+    </div>
+    </div>
+
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            Abstract
+        </div>
+        <div class="details">
+            Existing Human NeRF methods for reconstructing 3D humans typically rely on multiple 2D images from multi-view cameras or monocular videos captured from fixed camera views. However, in real-world scenarios, human images are often captured from random camera angles, presenting challenges for high-quality 3D human reconstruction. In this paper, we propose <strong>SHERF</strong>, the first <strong>generalizable Human NeRF model</strong> for recovering animatable 3D humans from a single input image. SHERF extracts and encodes 3D human representations in canonical space, enabling rendering and animation from free views and poses. To achieve high-fidelity novel view and pose synthesis, the encoded 3D human representations should capture both global appearance and local fine-grained textures. To this end, we propose a bank of 3D-aware hierarchical features, including global, point-level, and pixel-aligned features, to facilitate informative encoding. Global features enhance the information extracted from the single input image and complement the information missing from the partial 2D observation. Point-level features provide strong clues of 3D human structure, while pixel-aligned features preserve more fine-grained details. To effectively integrate the 3D-aware hierarchical feature bank, we design a feature fusion transformer. Extensive experiments on THuman, RenderPeople, ZJU_MoCap, and HuMMan datasets demonstrate that SHERF achieves state-of-the-art performance, with better generalizability for novel view and pose synthesis.
+        </div>
+    </section>
+
+    <section class="section links-section">
+        <div class="section-title">
+            Links
+        </div>
+        <div class="details links-table">
+            <table>
+                <tbody><tr>
+                    <td>
+                        <div class="links-container">
+                            <a href="https://arxiv.org/abs/" target="_blank"><img class="links-cover" src="./SHERF - Project Page_files/paper_first_page.png" alt="PDF Cover"></a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="links-container">
+                            <a href="https://www.youtube.com/embed/xyiv-cW6VcI" target="_blank"><img class="links-cover" src="./SHERF - Project Page_files/youtube-icon.png" alt="youtube icon"></a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="links-container">
+                            <a href="https://github.com/skhu101/SHERF" target="_blank"><img class="links-cover" src="./SHERF - Project Page_files/github.png" alt="github icon"></a>
+                        </div>
+                    </td>
+                    <!-- <td>
+                        <div class="links-container">
+                            <a href="https://colab.research.google.com/github/hongfz16/SHERF/blob/main/notebook/SHERF_Demo.ipynb" target="_blank"><img class="links-cover" src="./SHERF - Project Page_files/colab-icon.png" alt="colab icon">
+                        </a></div><a href="https://colab.research.google.com/github/hongfz16/SHERF/blob/main/notebook/SHERF_Demo.ipynb" target="_blank">
+                    </a></td>
+                    <td>
+                        <div class="links-container">
+                            <a href="https://huggingface.co/spaces/hongfz16/SHERF" target="_blank"><img class="links-cover" src="./SHERF - Project Page_files/hf-icon.png" alt="huggingface icon">
+                        </a></div><a href="https://huggingface.co/spaces/hongfz16/SHERF" target="_blank">
+                    </a></td> -->
+                </tr>
+                <tr>
+                    <td><a href="https://arxiv.org/abs/" target="_blank">arXiv</a></td>
+                    <td><a href="https://www.youtube.com/embed/xyiv-cW6VcI" target="_blank">Demo Video</a></td>
+                    <td><a href="https://github.com/skhu101/SHERF" target="_blank">Codes</a></td>
+                    <!-- <td><a href="https://colab.research.google.com/github/hongfz16/SHERF/blob/main/notebook/SHERF_Demo.ipynb" target="_blank">Colab Demo</a></td>
+                    <td><a href="https://huggingface.co/spaces/hongfz16/SHERF" target="_blank">Hugging Face Demo</a></td> -->
+                </tr>
+            </tbody></table>
+        </div>
+    </section>
+
+    <section class="section links-section">
+        <div class="section-title">
+            Novel View Synthesis
+        </div>
+        <div class="details links-table">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="25%">
+                            Input Image
+                        </td>
+                        <td width="25%">
+                            NHP
+                        </td>
+                        <td width="25%">
+                            MPS-NeRF
+                        </td>
+                        <td width="25%">                            
+                            SHERF (ours)
+                        </td>
+
+                    <tr>
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000722_frame0002_view0000_gt.png" width="100%">
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000722-rp_tina_rigged_001_nv.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000722-rp_tina_rigged_001_nv.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000722-rp_tina_rigged_001_nv.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000743_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000743-rp_toshiro_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000743-rp_toshiro_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000743-rp_toshiro_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000727_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000727-rp_tina_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000727-rp_tina_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000727-rp_tina_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000731_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000731-rp_tony_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000731-rp_tony_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000731-rp_tony_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000725_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000725-rp_tina_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000725-rp_tina_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000725-rp_tina_rigged_004_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000745_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000745-rp_toshiro_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000745-rp_toshiro_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000745-rp_toshiro_rigged_006_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+    
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000723_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000723-rp_tina_rigged_002_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000723-rp_tina_rigged_002_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000723-rp_tina_rigged_002_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000748_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000748-rp_toshiro_rigged_009_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000748-rp_toshiro_rigged_009_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000748-rp_toshiro_rigged_009_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000728_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000728-rp_tina_rigged_007_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000728-rp_tina_rigged_007_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000728-rp_tina_rigged_007_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000751_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000751-rp_tyler_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000751-rp_tyler_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000751-rp_tyler_rigged_003_nv.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        </tr>
+
+            </tbody></table>
+        </div>
+    </section>
+
+    <section class="section links-section">
+        <div class="section-title">
+            Novel Pose Synthesis
+        </div>
+        <div class="details links-table">
+            <table cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="25%">
+                            Input Image
+                        </td>
+                        <td width="25%">
+                            NHP
+                        </td>
+                        <td width="25%">
+                            MPS-NeRF
+                        </td>
+                        <td width="25%">                            
+                            SHERF (ours)
+                        </td>
+
+                    <tr>
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000722_frame0002_view0000_gt.png" width="100%">
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000722-rp_tina_rigged_001_np.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000722-rp_tina_rigged_001_np.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    <td>
+                    <div class="img-comp-container">
+                        <div class="img-comp-img">
+                            <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000722-rp_tina_rigged_001_np.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000743_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000743-rp_toshiro_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000743-rp_toshiro_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000743-rp_toshiro_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000727_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000727-rp_tina_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000727-rp_tina_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000727-rp_tina_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000731_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000731-rp_tony_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000731-rp_tony_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000731-rp_tony_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000725_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000725-rp_tina_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000725-rp_tina_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000725-rp_tina_rigged_004_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000745_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000745-rp_toshiro_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000745-rp_toshiro_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000745-rp_toshiro_rigged_006_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+    
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000723_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000723-rp_tina_rigged_002_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000723-rp_tina_rigged_002_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000723-rp_tina_rigged_002_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000748_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000748-rp_toshiro_rigged_009_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000748-rp_toshiro_rigged_009_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000748-rp_toshiro_rigged_009_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000728_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000728-rp_tina_rigged_007_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000728-rp_tina_rigged_007_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000728-rp_tina_rigged_007_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                    </tr>
+
+                    <tr>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <img class="preload" src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000751_frame0002_view0000_gt.png" width="100%">
+                            </div>
+                        </div>
+                        </td>
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/NHP/seq_000751-rp_tyler_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/MPS-NeRF/seq_000751-rp_tyler_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        <td>
+                        <div class="img-comp-container">
+                            <div class="img-comp-img">
+                                <video id="v0" width="100%" autoplay="" loop="" muted="" controls="">
+                                    <source src="./SHERF - Project Page_files/SHERF_vis/SHERF/seq_000751-rp_tyler_rigged_003_np.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        </td> 
+                        </tr>
+
+            </tbody></table>
+        </div>
+    </section>
+
+
+
+    <section class="section">
+        <div class="section-title">
+            Method Overview
+        </div>
+        <div style="width: 70%; text-align: center; margin:auto;">
+            <img style="width:100%" src="./SHERF - Project Page_files/SHERF_overview.png">
+            <em>Figure 1. SHERF Framework.</em>
+        </div>
+        <p>To render the target image, we first cast rays and sample points in the target space. The sample points are transformed to the canonical space through inverse LBS. We then query the corresponding 3D-aware global, point-level, and pixel-aligned features. The deformed points, combined with the bank of features, are input into the feature fusion transformer and NeRF decoder to get the RGB and density, which are further used to produce the target image through volume rendering.</p>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            Demo Video
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <iframe width="889" height="500" src="https://www.youtube.com/embed/xyiv-cW6VcI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            Bibtex
+        </div>
+        <div class="details">       
+            <pre>@article{SHERF,
+        title={SHERF: Generalizable Human NeRF from a Single Image},
+        author={Hu, Shoukang and Hong, Fangzhou and Pan, Liang and Mei, Haiyi and Yang, Lei and Liu, Ziwei},
+        journal={arXiv preprint},
+        year={2023}
+    }
+    </pre>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            Wonderful Human Generation
+        </div>
+        <p>There are lots of wonderful related works that might be of interest to you.</p>
+        <h6><strong>3D Human Generation</strong></h6>
+        <p>+ <a href="https://hongfz16.github.io/projects/EVA3D.html" target="_blank">EVA3D</a> is a high-quality unconditional 3D human generative model that only requires 2D image collections for training.</p>
+        <p>+ <a href="https://hongfz16.github.io/projects/AvatarCLIP.html" target="_blank">AvatarCLIP</a> generate and animate diverse 3D avatars given descriptions of body shapes, appearances and motions in a zero-shot way.</p>
+        <h6><strong>2D Human Generation</strong></h6>
+        <p>+ <a href="https://yumingj.github.io/projects/Text2Human.html" target="_blank">Text2Human</a> proposes a text-driven controllable human image generation framework.</p>
+        <p>+ <a href="https://stylegan-human.github.io/" target="_blank">StyleGAN-Human</a> scales up high-quality 2D human dataset and achieves impressive 2D human generation results.</p>
+        <h6><strong>Motion Generation</strong></h6>
+        <p>+ <a href="https://mingyuan-zhang.github.io/projects/MotionDiffuse.html" target="_blank">MotionDiffuse</a> is the first diffusion-model-based text-driven motion generation framework with probabilistic mapping, realistic synthesis and multi-level manipulation ability.</p>
+        <p>+ <a href="https://www.mmlab-ntu.com/project/bailando/index.html" target="_blank">Bailando</a> introduces an actor-critic-based reinforcement learning scheme to the GPT to achieve synchronized alignment between diverse motion tempos and music beats.</p>
+    </section>
+
+    <!-- <section class="section">
+        <div class="section-title">
+            Acknowledgement
+        </div>
+        <p>This study is supported by NTU NAP, MOE AcRF Tier 2 (T2EP20221-0033), and under the RIE2020 Industry Alignment Fund – Industry Collaboration Projects (IAF-ICP) Funding Initiative, as well as cash and in-kind contribution from the industry partner(s).</p>
+    </section> -->
+
+    <tr>
+        <div class="widgetContainer" style="width:200px; margin-left: 40%;">
+            <script type="text/javascript" id="clstr_globe" src="//clustrmaps.com/globe.js?d=T0swBrkINNMN4hmUe4Abwtn7r1IeHosGlOhfqmAHEIY"></script>
+        </div>
+    </tr>
+</div>
+
+<script>
+    initComparisons();
+</script>
+
+
+
+<!-- <footer class="footer">
+    <div class="text-center">
+        
+        <small id="copyright">
+            Updated: 2023-03-21
+            <div id="icon">
+                <span class="fa fa-heart"></span>
+            </div>
+        By Shoukang Hu
+        </small>
+    </div>
+</footer> -->
+
+
+
+
+
+</body></html>
