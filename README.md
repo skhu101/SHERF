@@ -16,6 +16,9 @@
 <div>
     <sup>*</sup>Equal Contribution&emsp; <sup>✉</sup>Corresponding Author
 </div>
+<div>
+    ICCV 2023
+</div>
 
 <strong>SHERF learns a Generalizable Human NeRF to animate 3D humans from a single image.</strong>
 
