@@ -107,7 +107,7 @@ bash train_zju_mocap_512x512.sh
 
 If you hope to evaluate the trained checkpoints, please add --test_flag True --resume CHECKPOINT.
 
-## Citations
+## :love_you_gesture: Citation
 <!-- --- -->
 
 If you find the codes of this work or the associated ReSynth dataset helpful to your research, please consider citing:
