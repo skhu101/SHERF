@@ -69,11 +69,6 @@ class TriPlaneGenerator(torch.nn.Module):
         self.use_3d_feature = use_3d_feature
 
         self._last_planes = None
-        self.count = 0
-        # # load SMPL model
-        # neutral_smpl_path = os.path.join('assets', 'SMPL_NEUTRAL.pkl')
-        # params = read_pickle(neutral_smpl_path)
-        # self.f = torch.tensor(np.array(params['f']).astype(float), dtype=torch.long, device=torch.device('cuda', torch.cuda.current_device()))
 
     def mapping(self, z, c, input_img=None, truncation_psi=1, truncation_cutoff=None, update_emas=False):
         # del z
@@ -98,9 +93,6 @@ class TriPlaneGenerator(torch.nn.Module):
         near = input_data['near_all'][:,0]
         far = input_data['far_all'][:,0]
 
-        # mask_at_box = input_data['mask_at_box_all'][:,0]
-        # near = input_data['near_all'][:,0][mask_at_box].unsqueeze(0)
-        # far = input_data['far_all'][:,0][mask_at_box].unsqueeze(0)
         # Create triplanes by running StyleGAN backbone
         N, M, _ = ray_origins.shape
         if use_cached_backbone and self._last_planes is not None:
@@ -125,31 +117,6 @@ class TriPlaneGenerator(torch.nn.Module):
             # obs_img = obs_input_img.reshape(-1, *obs_input_img.shape[2:])
             obs_vertex_rgb = F.grid_sample(obs_input_img, obs_uv_, align_corners=True)[..., 0].permute(0,2,1)  # [B, N, C]
 
-            # import pdb; pdb.set_trace()
-            # obs_uv[0,:,1][obs_uv[0,:,1]>512] = 0
-            # obs_uv[0,:,0][obs_uv[0,:,0]>512] = 0
-            # test_image = obs_input_img[0].clone().permute(1,2,0)
-            # test_image = torch.zeros_like(obs_input_img[0].clone().permute(1,2,0))
-            # test_image[obs_uv[0,:,1].type(torch.LongTensor), obs_uv[0,:,0].type(torch.LongTensor)] = obs_vertex_rgb
-            # imageio.imwrite(f'training_data_RenderPeople_vis/obs_vertex_img_{self.count}.png', 255*test_image.cpu().numpy())
-            # self.count += 1
-
-            # target_img = input_data['img_all'][0,0]
-            # obs_input_img[0].permute(1,2,0)[obs_input_img[0].permute(1,2,0)==0] = 1
-            # target_img.permute(1,2,0)[target_img.permute(1,2,0)==0.1] = 1
-            # test_image = torch.ones_like(obs_input_img[0]).permute(1,2,0)
-            # test_image = obs_input_img[0].clone().permute(1,2,0)
-            # test_image = torch.zeros((3,1024,1024)).permute(1,2,0).to(obs_input_img.device)
-            # test_image[obs_uv[0,:,1].type(torch.LongTensor), obs_uv[0,:,0].type(torch.LongTensor)] = obs_vertex_rgb[0,:,:3]
-            # imageio.imwrite('obs_vertex_img_2.png', 255*test_image[:512, :512].cpu().numpy())
-            # imageio.imwrite('obs_img.png', 255*obs_input_img[0].permute(1,2,0).cpu().numpy())
-            # imageio.imwrite('target_img_2d_f.png', 255*target_img.permute(1,2,0).cpu().numpy())
-            # obs_img_2d_f = torch.ones((4,512,512))*255
-            # obs_img_2d_f[:3] = obs_input_img[0] *255
-            # obs_img_2d_f[3] = 127
-            # imageio.imwrite('obs_img_2d_f.png', obs_img_2d_f.permute(1,2,0).cpu().numpy())
-
-
             # obs_vertex_rgb = obs_vertex_rgb.view(bs, -1 , *obs_vertex_rgb.shape[1:]).transpose(2,3)
             sh = obs_vertex_rgb.shape
             obs_vertex_rgb = self.renderer.rgb_enc(obs_vertex_rgb.reshape(-1,3)).reshape(*sh[:2], 33)[..., :32] # [bs, N_rays*N_samples, 32] 
@@ -163,8 +130,6 @@ class TriPlaneGenerator(torch.nn.Module):
 
             ## coarse deform target to caonical
             coarse_obs_vertex_canonical_pts = self.renderer.coarse_deform_target2c(input_data['obs_params'], input_data['obs_vertices'], input_data['t_params'], smpl_obs_pts) # [bs, N_rays*N_rand, 3]       
-
-            # coarse_obs_vertex_canonical_pts = input_data['t_vertices']
 
             # prepare sp input
             obs_sp_input, _ = self.prepare_sp_input(input_data['t_vertices'], coarse_obs_vertex_canonical_pts)
@@ -221,11 +186,7 @@ class TriPlaneGenerator(torch.nn.Module):
             max_xyz[:, 2] += 0.05
 
         bounds = torch.cat([min_xyz.unsqueeze(1), max_xyz.unsqueeze(1)], axis=1)
-        eps = 1e-6
-        # construct mask
-        # mask = (xyz[...,0] >= min_xyz[:, None, 0] - eps) * (xyz[...,1] >= min_xyz[:, None, 1] - eps) * \
-        #     (xyz[...,2] >= min_xyz[:, None, 2] - eps) * (xyz[...,0] <= max_xyz[:, None, 0] + eps) * \
-        #     (xyz[...,1] <= max_xyz[:, None, 1] + eps) * (xyz[...,2] <= max_xyz[:, None, 2] + eps) 
+
 
         dhw = xyz[:, :, [2, 1, 0]]
         min_dhw = min_xyz[:, [2, 1, 0]]

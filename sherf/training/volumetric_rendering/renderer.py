@@ -685,8 +685,6 @@ class ImportanceRenderer(torch.nn.Module):
 
             # From mean shape to normal shape
             shapedirs = self.SMPL_NEUTRAL['shapedirs'].cuda()
-            # shape_offset = (shapedirs * torch.reshape(params['shapes'].cuda(), (10,))).sum(dim=-1)
-            # query_pts = query_pts + shape_offset[vert_ids.squeeze(0).reshape(-1)]
             shape_offset = torch.matmul(shapedirs.unsqueeze(0), torch.reshape(params['shapes'].cuda(), (batch_size, 1, 10, 1))).squeeze(-1)
             shape_offset = torch.gather(shape_offset, 1, vert_ids.expand(-1, -1, 3)) # [bs, N_rays*N_samples, 3]
             query_pts = query_pts + shape_offset
@@ -697,8 +695,6 @@ class ImportanceRenderer(torch.nn.Module):
             batch_size = pose_.shape[0]
             rot_mats = batch_rodrigues(pose_.view(-1, 3)).view([batch_size, -1, 3, 3])
             pose_feature = (rot_mats[:, 1:, :, :] - ident).view([batch_size, -1]).cuda()
-            # pose_offsets = torch.matmul(pose_feature, posedirs.view(6890*3, -1).transpose(1,0)).view(-1, 3)
-            # query_pts = query_pts + pose_offsets[vert_ids.squeeze(0).reshape(-1)]
             pose_offsets = torch.matmul(pose_feature.unsqueeze(1), posedirs.view(6890*3, -1).transpose(1,0).unsqueeze(0)).view(batch_size, -1, 3)
             pose_offsets = torch.gather(pose_offsets, 1, vert_ids.expand(-1, -1, 3)) # [bs, N_rays*N_samples, 3]
             query_pts = query_pts + pose_offsets
@@ -721,14 +717,11 @@ class ImportanceRenderer(torch.nn.Module):
     def projection(self, query_pts, R, T, K, face=None):
         RT = torch.cat([R, T], -1)
         xyz = torch.repeat_interleave(query_pts.unsqueeze(dim=1), repeats=RT.shape[1], dim=1) #[bs, view_num, , 3]
-        # xyz = torch.bmm(xyz.float(), RT[:, :, :, :3].transpose(2, 3).float()) + RT[:, :, :, 3:].transpose(2, 3).float()
-        # xyz = torch.matmul(xyz[:, :, :, None].float(), RT[:, :, None, :, :3].transpose(3, 4).float()) + RT[:, :, None, :, 3:].transpose(3, 4).float()
         xyz = torch.matmul(RT[:, :, None, :, :3].float(), xyz[..., None].float()) + RT[:, :, None, :, 3:].float()
 
         if face is not None:
             # compute the normal vector for each vertex
             smpl_vertex_normal = compute_normal(query_pts, face) # [bs, 6890, 3]
-            # smpl_vertex_mask = torch.einsum('bij,bij->bi', smpl_vertex_normal_cam, xyz.squeeze(1).squeeze(-1)) < 0 
             smpl_vertex_normal_cam = torch.matmul(RT[:, :, None, :, :3].float(), smpl_vertex_normal[:, None, :, :, None].float()) # [bs, 1, 6890, 3, 1]
             smpl_vertex_mask = (smpl_vertex_normal_cam * xyz).sum(-2).squeeze(1).squeeze(-1) < 0 
 

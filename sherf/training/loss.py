@@ -124,7 +124,6 @@ class StyleGAN2Loss(Loss):
         real_img_raw = real_img #filtered_resizing(real_img, size=neural_rendering_resolution, f=self.resample_filter, filter_mode=self.filter_mode)
 
         mask_at_box_raw = input_data['mask_at_box_all'][:,0].reshape(input_data['mask_at_box_all'].shape[0], real_img_raw.shape[-2], real_img_raw.shape[-1])
-        mask_at_box = input_data['mask_at_box_large_all'][:,0].reshape(input_data['mask_at_box_large_all'].shape[0], real_img.shape[-2], real_img.shape[-1])
 
         real_img = {'image': real_img, 'image_raw': real_img_raw}
 
@@ -150,7 +149,6 @@ class StyleGAN2Loss(Loss):
                 # compute loss
                 img_loss_raw = img2mse( gen_img['image_raw'].permute(0,2,3,1)[mask_at_box_raw] / 2 + 0.5, real_img['image_raw'].permute(0,2,3,1)[mask_at_box_raw])
                 acc_loss_raw = img2mse( gen_img['weights_image'].permute(0,2,3,1)[mask_at_box_raw], input_data['bkgd_msk_all'].reshape(*input_data['bkgd_msk_all'].shape[:2], real_img_raw.shape[-2], real_img_raw.shape[-1]).type(torch.int8).permute(0,2,3,1)[mask_at_box_raw])
-                img_loss = torch.zeros(1).to(real_img_raw.device)
                 ssim_raw = 0
                 lpips_raw = 0
                 for i in range(mask_at_box_raw.shape[0]):
@@ -164,19 +162,18 @@ class StyleGAN2Loss(Loss):
                 loss_Gmain_Dgen = torch.zeros(1).to(real_img_raw.device)#torch.nn.functional.softplus(-gen_logits).mean()
                 training_stats.report('Loss/G_Dgen/loss', loss_Gmain_Dgen)
                 if recons_loss:
-                    loss_Gmain = 100*img_loss_raw + 10*acc_loss_raw + (1-ssim_raw) + lpips_raw + 100*img_loss + 0*loss_Gmain_Dgen
+                    loss_Gmain = 100*img_loss_raw + 10*acc_loss_raw + (1-ssim_raw) + lpips_raw + 0*loss_Gmain_Dgen
                 training_stats.report('Loss/img_loss_raw', img_loss_raw)
                 training_stats.report('Loss/acc_loss_raw', acc_loss_raw)
                 training_stats.report('Loss/ssim_raw', ssim_raw)
                 training_stats.report('Loss/lpips_raw', lpips_raw)
-                training_stats.report('Loss/img_loss', img_loss)
                 training_stats.report('Loss/img_D', loss_Gmain_Dgen)
                 training_stats.report('Loss/G/loss', loss_Gmain)
 
             with torch.autograd.profiler.record_function('Gmain_backward'):
                 loss_Gmain.mean().mul(gain).backward()
         
-            return loss_Gmain, img_loss_raw, acc_loss_raw, ssim_raw, lpips_raw, img_loss, loss_Gmain_Dgen.mean()
+            return loss_Gmain, img_loss_raw, acc_loss_raw, ssim_raw, lpips_raw, loss_Gmain_Dgen.mean()
 
         # # Density Regularization
         # if phase in ['Greg', 'Gboth'] and self.G.rendering_kwargs.get('density_reg', 0) > 0 and self.G.rendering_kwargs['reg_type'] == 'l1':

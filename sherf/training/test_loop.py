@@ -90,122 +90,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     batch_size = 1
     humans_data_root = os.path.dirname(data_root)
 
-    # evaluate 
-    pose_start = 0
-    pose_interval = 4
-    pose_num = 2
-    # train_data_root_list = [
-    #     "data/RenderPeople_recon/20230228/seq_000000-rp_aaron_rigged_001",
-    #     "data/RenderPeople_recon/20230228/seq_000443-rp_melanie_rigged_007",
-    #     "data/RenderPeople_recon/20230228/seq_000715-rp_tiffany_rigged_004",
-    # ]
 
-    # for p, human_data_path in enumerate(train_data_root_list):
-    #     data_root = human_data_path.strip()
-    #     total_psnr = 0.0
-    #     total_psnr_raw = 0.0
-    #     num = 0
-    #     human_name = os.path.basename(data_root)
-    #     savedir_human = os.path.join(savedir, human_name)
-    #     os.makedirs(savedir_human, exist_ok=True)
-
-    #     test_dataset_kwargs = dnnlib.EasyDict(class_name='training.RenderPeople_dataset.RenderPeopleDatasetBatch', data_root=data_root, split='test', multi_person=False, num_instance=1, start=pose_start, interval=pose_interval, poses_num=pose_num, image_scaling=neural_rendering_resolution/512, white_back=white_back, sample_obs_view=sample_obs_view, fix_obs_view=fix_obs_view)
-    #     test_set = dnnlib.util.construct_class_by_name(**test_dataset_kwargs) # subclass of training.dataset.Dataset
-        
-    #     test_loader = DataLoader(test_set, batch_size=1, shuffle=False, num_workers=0, pin_memory=False)
-        
-    #     for i, test_data in enumerate(test_loader):
-    #         test_data = to_cuda(device, test_data)
-
-    #         data_interval = 10
-
-    #         print("subject: ", human_name, " pose: ", i)
-    #         for k in range(0, test_data['img_all'].shape[1], data_interval):
-
-    #             test_data_input = {}
-    #             for key in test_data.keys():
-    #                 if key in ['img_all', 'msk_all', 'ray_o_all', 'ray_d_all', 'near_all', 'far_all', 'mask_at_box_all', 'bkgd_msk_all', 'mask_at_box_large_all']:
-    #                     test_data_input[key] = test_data[key][:, k:k+1]
-    #                 elif key in ['obs_img_all', 'obs_K_all', 'obs_R_all', 'obs_T_all']:
-    #                     test_data_input[key] = test_data[key][:, 0:1]
-    #                 else:
-    #                     test_data_input[key] = test_data[key]
-
-    #             gen_img = model(test_data_input, torch.randn(1, 512).to(device), torch.zeros((1, 25)).to(device), \
-    #                 neural_rendering_resolution=neural_rendering_resolution, use_sr_module=use_sr_module, test_flag=True)
-
-    #             mask_at_box_raw = test_data['mask_at_box_all'][:,k:k+1].reshape(test_data['mask_at_box_all'].shape[0], neural_rendering_resolution, neural_rendering_resolution)
-    #             mask_at_box = test_data['mask_at_box_large_all'][:,k:k+1].reshape(test_data['mask_at_box_large_all'].shape[0], 512, 512)
-
-    #             for j in range(batch_size):
-
-    #                 real_img = test_data['img_all'][:,k:k+1][j]
-    #                 real_img_raw = torch.nn.functional.interpolate(real_img, size=(neural_rendering_resolution, neural_rendering_resolution), \
-    #                     mode='bilinear', align_corners=False, antialias=True)
-
-    #                 img_pred_raw = (gen_img['image_raw'][j] / 2 + 0.5).permute(1,2,0)
-    #                 gt_img_raw = real_img_raw[j].permute(1,2,0)
-
-    #                 img_pred = (gen_img['image'][j] / 2 + 0.5).permute(1,2,0)
-    #                 gt_img = real_img[j].permute(1,2,0)
-
-    #                 # gt_img = img_gt_all[j]
-    #                 # img_pred[~mask_at_box[j]] = 0
-
-    #                 rgb8_raw = to8b(img_pred_raw.cpu().numpy())
-    #                 gt_rgb8_raw = to8b(gt_img_raw.cpu().numpy())
-    #                 rgb8_raw = np.concatenate([rgb8_raw, gt_rgb8_raw], axis=1)
-
-    #                 filename_raw = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}_raw.png'.format(int(test_data['pose_index'][j])*data_interval, int(test_data['pose_index'][j])*data_interval, k))
-    #                 imageio.imwrite(filename_raw, rgb8_raw)
-
-    #                 rgb8 = to8b(img_pred.cpu().numpy())
-    #                 gt_rgb8 = to8b(gt_img.cpu().numpy())
-    #                 rgb8 = np.concatenate([rgb8, gt_rgb8], axis=1)
-
-    #                 filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j])*data_interval, int(test_data['pose_index'][j])*data_interval, k))
-    #                 imageio.imwrite(filename, rgb8)
-
-    #                 if k < test_data['img_all'].shape[1]:
-    #                     test_loss_raw = img2mse(img_pred_raw[mask_at_box_raw[j]], gt_img_raw[mask_at_box_raw[j]])
-    #                     psnr_raw = round(mse2psnr(test_loss_raw).item(), 3)
-
-    #                     test_loss = img2mse(img_pred[mask_at_box[j]], gt_img[mask_at_box[j]])
-    #                     psnr = round(mse2psnr(test_loss).item(), 3)
-
-    #                     print("[Test] ", "Source:", int(test_data['pose_index'][j]), " Target:", int(test_data['pose_index'][j]), " View:", k, \
-    #                         " Loss raw:", round(test_loss_raw.item(), 5), " PSNR raw: ", {psnr_raw}, 
-    #                         " Loss:", round(test_loss.item(), 5), " PSNR: ", {psnr})
-    #                     total_psnr_raw += mse2psnr(test_loss_raw).item()
-    #                     total_psnr += mse2psnr(test_loss).item()
-    #                     num += 1                 
-                        
-    #                     input_img = test_data['obs_img_all'][j,12].cpu().numpy().transpose(1,2,0).reshape(512, -1, 3) * 255. #NCHW->HNWC
-    #                     input_img = cv2.resize(input_img, (512*2, int(input_img.shape[0] * 512*2 / input_img.shape[1])))
-
-    #                     # img = image_add_text(filename, 'PSNR: %f' % (psnr), 20, 20, text_color=(255, 255, 255), text_size=20)
-    #                     img = rgb8
-    #                     img = np.concatenate([input_img, img], axis=0)
-    #                     imageio.imwrite(filename, to8b(img/255.))
-
-    #                     gt_filename_raw = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_raw_gt.png'.format(int(test_data['pose_index'][j])*data_interval+pose_start, k))
-    #                     pred_filename_raw = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_raw.png'.format(int(test_data['pose_index'][j])*data_interval+pose_start, k))
-    #                     imageio.imwrite(gt_filename_raw, to8b(gt_img_raw.cpu().numpy()))
-    #                     imageio.imwrite(pred_filename_raw, to8b(img_pred_raw.cpu().numpy()))
-
-    #                     gt_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_gt.png'.format(int(test_data['pose_index'][j])*data_interval+pose_start, k))
-    #                     pred_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}.png'.format(int(test_data['pose_index'][j])*data_interval+pose_start, k))
-    #                     imageio.imwrite(gt_filename, to8b(gt_img.cpu().numpy()))
-    #                     imageio.imwrite(pred_filename, to8b(img_pred.cpu().numpy()))
-    #                 else:
-    #                     print("[Test] ", "Source:", int(test_data['pose_index'][j]), " Target:", int(test_data['pose_index'][j]), "View:", k)
-
-    #     avg_psnr_raw = total_psnr_raw / num
-    #     np.save(savedir_human+'/psnr_raw_{}.npy'.format(int(avg_psnr_raw*100)), np.array(avg_psnr_raw))
-    #     avg_psnr = total_psnr / num
-    #     np.save(savedir_human+'/psnr_{}.npy'.format(int(avg_psnr*100)), np.array(avg_psnr))
-
-    # novel subject evaluation with obs image from the same pose
+    ## novel view synthesis evaluation with obs image from the same pose
     pose_start = nv_pose_start # 0 
     pose_interval = 2
     pose_num = 5
@@ -227,8 +113,6 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     elif dataset_name == 'HuMMan':
         class_name = 'training.HuMMan_dataset.HuMManDatasetBatch'
         image_scaling=1/3
-        # with open(humans_list) as f:
-        #     humans_name = f.readlines()[317:339]
         humans_name = [
             'p000455_a000986',
             'p000456_a000396',
@@ -255,9 +139,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         ]
     elif dataset_name == 'zju_mocap':
         class_name = 'training.NeuBody_dataset.NeuBodyDatasetBatch'
-        image_scaling=1/3
-        # with open(humans_list) as f:
-        #     humans_name = f.readlines()[317:339]
+        image_scaling=0.5
         humans_name = [
             "CoreView_377", 
             "CoreView_313", 
@@ -361,7 +243,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         avg_lpips = np.array(total_lpips).mean()
         np.save(savedir+'/novel_view/'+f'obs_view_{obs_view}'+'/lpips_{}.npy'.format(int(avg_lpips*100)), np.array(total_lpips))
 
-    # novel pose synthesis with obs image from the 1st pose
+    # novel pose synthesis with obs image from the np_pose_start pose
     pose_start = np_pose_start # 2
     for obs_view in obs_view_lst:
 
@@ -372,13 +254,6 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         for p, human_data_path in enumerate(all_humans):
             data_root = human_data_path.strip()
             human_name = os.path.basename(data_root)
-
-            # if dataset_name == 'RenderPeople':
-            #     class_name = 'training.RenderPeople_dataset.RenderPeopleDatasetBatch'
-            #     image_scaling=neural_rendering_resolution/512
-            # elif dataset_name == 'THuman':
-            #     class_name = 'training.THuman_dataset.THumanDatasetBatch'
-            #     image_scaling=neural_rendering_resolution/512
 
             test_dataset_kwargs = dnnlib.EasyDict(class_name=class_name, data_root=data_root, split='test', multi_person=False, num_instance=1, poses_start=pose_start, poses_interval=pose_interval, poses_num=pose_num, image_scaling=image_scaling, white_back=white_back, sample_obs_view=sample_obs_view, fix_obs_view=fix_obs_view)
             test_set = dnnlib.util.construct_class_by_name(**test_dataset_kwargs) # subclass of training.dataset.Dataset
@@ -422,8 +297,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
 
                     filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j]), int(test_data['pose_index'][j]), view_id))
 
-                    input_img = test_data['obs_img_all'][j, 0].cpu().numpy().transpose(1,2,0).reshape(512, -1, 3) * 255. #NCHW->HNWC
-                    input_img = cv2.resize(input_img, (512*2, int(input_img.shape[0] * 512*2 / input_img.shape[1])))
+                    input_img = test_data['obs_img_all'][j,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
+                    input_img = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
 
                     img = rgb8
                     img = np.concatenate([input_img, img], axis=0)

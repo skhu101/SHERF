@@ -362,7 +362,7 @@ def training_loop(
             phase.module.requires_grad_(True)
             for real_img, real_c, gen_z, gen_c in zip(phase_real_img, phase_real_c, phase_gen_z, phase_gen_c):
                 if phase.name in ['Gmain', 'Gboth']:
-                    loss_Gmain_train, img_loss_raw_train, acc_loss_raw_train, ssim_raw_train, lpips_raw_train, img_loss_train, loss_Gmain_Dgen = loss.accumulate_gradients(phase=phase.name, input_data=input_data, real_img=real_img, real_c=real_c, gen_z=gen_z, gen_c=gen_c, gain=phase.interval, cur_nimg=cur_nimg, use_sr_module=use_sr_module, recons_loss=recons_loss, rank=rank)
+                    loss_Gmain_train, img_loss_raw_train, acc_loss_raw_train, ssim_raw_train, lpips_raw_train, loss_Gmain_Dgen = loss.accumulate_gradients(phase=phase.name, input_data=input_data, real_img=real_img, real_c=real_c, gen_z=gen_z, gen_c=gen_c, gain=phase.interval, cur_nimg=cur_nimg, use_sr_module=use_sr_module, recons_loss=recons_loss, rank=rank)
                 elif phase.name in ['Dmain', 'Dboth']:
                     loss_Dgen, loss_Dreal = torch.zeros(1).to(device), torch.zeros(1).to(device)
                 elif phase.name in ['Dreg', 'Dboth']:
@@ -407,7 +407,6 @@ def training_loop(
         running_acc_loss_raw_train += acc_loss_raw_train
         running_ssim_raw_train += ssim_raw_train
         running_lpips_raw_train += lpips_raw_train        
-        running_img_loss_train += img_loss_train
         running_loss_Gmain_Dgen += loss_Gmain_Dgen
         running_loss_Dgen += loss_Dgen
         running_loss_Dreal += loss_Dreal
@@ -425,7 +424,6 @@ def training_loop(
                 dist.all_reduce(running_acc_loss_raw_train)
                 dist.all_reduce(running_ssim_raw_train)
                 dist.all_reduce(running_lpips_raw_train)
-                dist.all_reduce(running_img_loss_train)
                 dist.all_reduce(running_loss_Gmain_Dgen)
                 dist.all_reduce(running_loss_Dgen)
                 dist.all_reduce(running_loss_Dreal)
@@ -435,21 +433,19 @@ def training_loop(
             running_acc_loss_raw_train /= i_print
             running_ssim_raw_train /= i_print
             running_lpips_raw_train /= i_print
-            running_img_loss_train /= i_print
+            # running_img_loss_train /= i_print
             running_loss_Gmain_Dgen /= i_print
             running_loss_Dgen /= i_print
             running_loss_Dreal /= i_print
             running_loss_Dr1 /= (loss_Dr1_count*num_gpus)
             if rank == 0:
                 psnr_raw = mse2psnr(running_img_loss_raw_train)
-                psnr = mse2psnr(running_img_loss_train)
                 stats_metrics['psnr_raw'] = round(psnr_raw.item(), 3)
-                stats_metrics['psnr'] = round(psnr.item(), 3)
-                print("[TRAIN] Cur_nimg: {}  Loss: {} Lr: {} Img Loss raw: {} Acc Loss raw {} SSIM raw {} Lpips raw {} Img Loss {} loss Gmain Dgen {} Dgen Loss {} Dreal Loss {} Dr1 Loss {} PSNR raw: {} PSNR: {} ".\
+                print("[TRAIN] Cur_nimg: {}  Loss: {} Lr: {} Img Loss raw: {} Acc Loss raw {} SSIM raw {} Lpips raw {} loss Gmain Dgen {} Dgen Loss {} Dreal Loss {} Dr1 Loss {} PSNR raw: {}".\
                     format(cur_nimg, round(running_loss_Gmain_train.item(), 5), round(opt.param_groups[0]['lr'], 5), round(running_img_loss_raw_train.item(), 5), \
                         round(running_acc_loss_raw_train.item(), 5), round(running_ssim_raw_train.item(), 3), round(running_lpips_raw_train.item(), 3), \
-                        round(running_img_loss_train.item(), 5), round(running_loss_Gmain_Dgen.item(), 5), round(running_loss_Dgen.item(), 5), round(running_loss_Dreal.item(), 5), \
-                                round(running_loss_Dr1.item(), 5), round(psnr_raw.item(), 3), round(psnr.item(), 3)))           
+                        round(running_loss_Gmain_Dgen.item(), 5), round(running_loss_Dgen.item(), 5), round(running_loss_Dreal.item(), 5), \
+                                round(running_loss_Dr1.item(), 5), round(psnr_raw.item(), 3)))           
                 
         if cur_nimg % i_print == 0: 
             running_loss_Gmain_train = running_img_loss_raw_train = running_acc_loss_raw_train \
