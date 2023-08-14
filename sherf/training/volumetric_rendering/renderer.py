@@ -560,27 +560,14 @@ class ImportanceRenderer(torch.nn.Module):
         bs = query_pts.shape[0]
         # joints transformation
         A, R, Th, joints = get_transform_params_torch(self.SMPL_NEUTRAL, params)
-        # J = torch.hstack((joints, torch.ones([*joints.shape[:2], 1])))
-        # J = torch.cat([joints, torch.ones([*joints.shape[:2], 1])], dim=-1)
-        # self.c_joints = joints # smpl space
-        # self.t_A = A # target to canonical space transformation
-        # self.t_joints = torch.matmul(A, J.reshape([-1, 4, 1])).reshape([-1, 4])[:, :3]
-
-        # transform smpl vertices from world space to smpl space
-        # smpl_pts = torch.mm((vertices - Th), R)
         smpl_pts = torch.matmul((vertices - Th), R)
-        # _, vert_ids, _ = knn_points(query_pts.unsqueeze(0).float(), smpl_pts.unsqueeze(0).float(), K=1)
         _, vert_ids, _ = knn_points(query_pts.float(), smpl_pts.float(), K=1)
-        # bweights = self.SMPL_NEUTRAL['weights'][vert_ids.squeeze(0)].view(-1,24).cuda()
-        # import pdb; pdb.set_trace()
         bweights = self.SMPL_NEUTRAL['weights'][vert_ids].view(*vert_ids.shape[:2], 24)#.to(vertices.device)
         # From smpl space target pose to smpl space canonical pose
-        # A = torch.mm(bweights, A.reshape(24, -1))
         A = torch.matmul(bweights, A.reshape(bs, 24, -1))
         A = torch.reshape(A, (bs, -1, 4, 4))
         can_pts = query_pts - A[..., :3, 3]
         R_inv = torch.inverse(A[..., :3, :3].float())
-        # can_pts = torch.sum(R_inv * can_pts[:, :, None], dim=-1)
         can_pts = torch.matmul(R_inv, can_pts[..., None]).squeeze(-1)
 
         if query_viewdirs is not None:
@@ -598,26 +585,15 @@ class ImportanceRenderer(torch.nn.Module):
             
             pose_offsets = torch.gather(pose_offsets, 1, vert_ids.expand(-1, -1, 3)) # [bs, N_rays*N_samples, 3]
             can_pts = can_pts - pose_offsets
-            # can_pts = can_pts - pose_offsets[vert_ids.squeeze(0).reshape(-1)]
 
             # To mean shape
             shapedirs = self.SMPL_NEUTRAL['shapedirs']  #.to(pose_.device)
-            # shape_offset = shapedirs.dot(torch.reshape(params['shapes'], (10,)))
-            # shape_offset = torch.einsum('ijk, k -> ij', shapedirs, torch.reshape(params['shapes'], (10,)))
-            # shape_offset = (shapedirs * torch.reshape(params['shapes'].cuda(), (10,))).sum(dim=-1)
             shape_offset = torch.matmul(shapedirs.unsqueeze(0), torch.reshape(params['shapes'], (batch_size, 1, 10, 1))).squeeze(-1)
             shape_offset = torch.gather(shape_offset, 1, vert_ids.expand(-1, -1, 3)) # [bs, N_rays*N_samples, 3]
             can_pts = can_pts - shape_offset
-            # can_pts = can_pts - shape_offset[vert_ids.squeeze(0).reshape(-1)]
 
         # From T To Big Pose        
         big_pose_params = t_params #self.big_pose_params(params)
-        # if self.mean_shape:
-        #     big_pose_params['shapes'] = torch.zeros_like(params['shapes'])
-
-        # smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL.pkl')
-        # vertex, joint = smpl_model(np.array(params['poses'][0].squeeze().cpu()), np.array(params['shapes'][0].squeeze().cpu()))
-        # vertex, joint = smpl_model(np.array(big_pose_params['poses'][0].squeeze().cpu()), np.array(big_pose_params['shapes'][0].squeeze().cpu()))
 
         if self.mean_shape:
             pose_ = big_pose_params['poses']
@@ -633,11 +609,8 @@ class ImportanceRenderer(torch.nn.Module):
             # can_pts = can_pts + shape_offset
 
         A, R, Th, joints = get_transform_params_torch(self.SMPL_NEUTRAL, big_pose_params)
-        # J = torch.hstack((self.c_joints, torch.ones([self.c_joints.shape[0], 1])))
-        # self.c_joints = torch.matmul(A, J.reshape([-1, 4, 1])).reshape([-1, 4])[:, :3]
         A = torch.matmul(bweights, A.reshape(bs, 24, -1))
         A = torch.reshape(A, (bs, -1, 4, 4))
-        # can_pts = torch.sum(A[..., :3, :3] * can_pts[:, :, None], dim=-1)
         can_pts = torch.matmul(A[..., :3, :3], can_pts[..., None]).squeeze(-1)
         can_pts = can_pts + A[..., :3, 3]
 
@@ -655,13 +628,11 @@ class ImportanceRenderer(torch.nn.Module):
         bweights = self.SMPL_NEUTRAL['weights'][vert_ids].view(*vert_ids.shape[:2], 24).cuda()
 
         # add weights_correction, normalize weights
-        # bweights = F.softmax(bweights + 0.2*weights_correction, dim=1)
         bweights = bweights + 0.2 * weights_correction # torch.Size([30786, 24])
         bweights = bweights / torch.sum(bweights, dim=-1, keepdim=True)
 
         ### From Big To T Pose
         big_pose_params = t_params
-        # big_pose_params = self.big_pose_params(params)
         A, R, Th, joints = get_transform_params_torch(self.SMPL_NEUTRAL, big_pose_params)
         A = torch.matmul(bweights, A.reshape(bs, 24, -1))
         A = torch.reshape(A, (bs, -1, 4, 4))
@@ -678,7 +649,6 @@ class ImportanceRenderer(torch.nn.Module):
             batch_size = pose_.shape[0]
             rot_mats = batch_rodrigues(pose_.view(-1, 3)).view([batch_size, -1, 3, 3])
             pose_feature = (rot_mats[:, 1:, :, :] - ident).view([batch_size, -1]).cuda()
-            # pose_offsets = torch.matmul(pose_feature, posedirs.view(6890*3, -1).transpose(1,0)).view(-1, 3)
             pose_offsets = torch.matmul(pose_feature.unsqueeze(1), posedirs.view(6890*3, -1).transpose(1,0).unsqueeze(0)).view(batch_size, -1, 3)
             pose_offsets = torch.gather(pose_offsets, 1, vert_ids.expand(-1, -1, 3)) # [bs, N_rays*N_samples, 3]
             query_pts = query_pts - pose_offsets
@@ -704,7 +674,6 @@ class ImportanceRenderer(torch.nn.Module):
         self.s_A = A
         A = torch.matmul(bweights, self.s_A.reshape(bs, 24, -1))
         A = torch.reshape(A, (bs, -1, 4, 4))
-        # can_pts = torch.sum(A[:, :3, :3] * query_pts[:, None], dim=2)
         can_pts = torch.matmul(A[..., :3, :3], query_pts[..., None]).squeeze(-1)
         smpl_src_pts = can_pts + A[..., :3, 3]
         
@@ -823,12 +792,6 @@ class SparseConvNet(nn.Module):
             features.append(feature_4)
 
         features = torch.cat(features, dim=1)
-        # features = torch.stack(features, dim=1).sum(1)
-        # TODO, why so much dimention ???
-        # B*C*D*H*W or B*D*H*W*C
-        # B*N*C or B*C*N(num of query point)
-        # torch.Size([1, 352, 4096])
-        # features = features.view(features.size(0), -1, features.size(4)).squeeze(0).transpose(0,1)
         features = features.view(features.size(0), -1, features.size(4)).transpose(1,2)
 
         return features
