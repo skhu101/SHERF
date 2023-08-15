@@ -380,7 +380,7 @@ class NeuBodyDatasetBatch(Dataset):
     def __getitem__(self, index):
 
         instance_idx = index // (self.poses_num * self.camera_view_num) if self.multi_person else 0
-        pose_index = ( index % (self.poses_num * self.camera_view_num) ) // self.camera_view_num * self.poses_interval + self.poses_start
+        pose_index = ( index % (self.poses_num * self.camera_view_num) ) // self.camera_view_num #* self.poses_interval + self.poses_start
         view_index = index % self.camera_view_num
 
         self.data_root = self.all_humans[instance_idx]
@@ -446,12 +446,17 @@ class NeuBodyDatasetBatch(Dataset):
             else:
                 self.obs_view_index = 10
 
-        # Load image, mask, K, D, R, T in observation space
-        obs_img_path = os.path.join(self.data_root, self.ims[pose_index][self.obs_view_index].replace('\\', '/'))
-        obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
-        obs_msk, origin_msk = np.array(self.get_mask(pose_index, self.obs_view_index))
+        if self.obs_pose_index is not None:
+            obs_pose_index = int(self.obs_pose_index)
+        else:
+            obs_pose_index = pose_index
 
-        obs_cam_ind = self.cam_inds[pose_index][self.obs_view_index]
+        # Load image, mask, K, D, R, T in observation space
+        obs_img_path = os.path.join(self.data_root, self.ims[obs_pose_index][self.obs_view_index].replace('\\', '/'))
+        obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
+        obs_msk, origin_msk = np.array(self.get_mask(obs_pose_index, self.obs_view_index))
+
+        obs_cam_ind = self.cam_inds[obs_pose_index][self.obs_view_index]
         obs_K = np.array(self.cams['K'][obs_cam_ind])
         obs_D = np.array(self.cams['D'][obs_cam_ind])
 
@@ -472,9 +477,10 @@ class NeuBodyDatasetBatch(Dataset):
 
         obs_img = np.transpose(obs_img, (2,0,1))
 
+        obs_i = int(os.path.basename(obs_img_path)[:-4])
+        _, _, _, _, _, _, _, obs_vertices, obs_params = self.prepare_input(obs_i)
+
         # obs view
-        obs_vertices = vertices.copy()
-        obs_params = params.copy()
         obs_img_all.append(obs_img)
         obs_K_all.append(obs_K)
         obs_R_all.append(obs_R)
@@ -498,7 +504,7 @@ class NeuBodyDatasetBatch(Dataset):
 
         ret = {
             "instance_idx": instance_idx, # person instance idx
-            'pose_index': pose_index, # pose_index in selected poses
+            'pose_index': pose_index * self.poses_interval + self.poses_start, # pose_index in selected poses
 
             # canonical space
             't_params': self.big_pose_params,

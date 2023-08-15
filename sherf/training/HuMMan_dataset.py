@@ -280,7 +280,6 @@ class HuMManDatasetBatch(Dataset):
         self.data_root = self.all_humans[instance_idx]
         self.cams = self.cams_all[instance_idx]
 
-
         if not os.path.exists(os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(0).zfill(3), str(pose_index).zfill(6)+'.png')):
             arr = os.listdir(os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(0).zfill(3)))
             pose_index = int(random.choice(arr).split('.')[0])
@@ -338,9 +337,14 @@ class HuMManDatasetBatch(Dataset):
             elif self.fix_obs_view:
                 obs_view_index = 0
 
+        if self.obs_pose_index is not None:
+            obs_pose_index = int(self.obs_pose_index)
+        else:
+            obs_pose_index = pose_index
+
         # Load image, mask, K, R, T in observation space
-        obs_img_path = os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(obs_view_index).zfill(3), str(pose_index).zfill(6)+'.png')            
-        obs_mask_path = os.path.join(self.data_root, 'kinect_mask', 'kinect_'+str(obs_view_index).zfill(3), str(pose_index).zfill(6)+'.png')
+        obs_img_path = os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')            
+        obs_mask_path = os.path.join(self.data_root, 'kinect_mask', 'kinect_'+str(obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')
         obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
         obs_msk = np.array(self.get_mask(obs_mask_path)) / 255.
         obs_img[obs_msk == 0] = 1 if self.white_back else 0
@@ -366,9 +370,11 @@ class HuMManDatasetBatch(Dataset):
 
         obs_img = np.transpose(obs_img, (2,0,1))
 
+        # Prepare smpl in observation space
+        obs_smpl_path = os.path.join(self.data_root, 'smpl_params', str(obs_pose_index).zfill(6)+'.npz') 
+        _, obs_vertices, obs_params = self.prepare_input(obs_smpl_path)
+
         # obs view
-        obs_vertices = vertices.copy()
-        obs_params = params.copy()
         obs_img_all.append(obs_img)
         obs_K_all.append(obs_K)
         obs_R_all.append(obs_R)

@@ -179,12 +179,14 @@ class THumanDatasetBatch(Dataset):
         ]) # view index of output_view, shape (num of poses, num of output_views)
 
         self.multi_person = multi_person
-        self.num_instance = num_instance
-        humans_data_root = os.path.dirname(data_root)
-        self.humans_list = os.path.join(humans_data_root, 'human_list.txt')
-        with open(self.humans_list) as f:
-            humans_name = f.readlines()[0:num_instance]
 
+        self.num_instance = num_instance
+        if self.multi_person:
+            humans_data_root = os.path.dirname(data_root)
+            self.humans_list = os.path.join(humans_data_root, 'human_list.txt')
+            with open(self.humans_list) as f:
+                humans_name = f.readlines()[0:num_instance]
+        
         self.all_humans = [data_root] if not multi_person else [os.path.join(humans_data_root, x.strip()) for x in humans_name]
         print('num of subjects: ', len(self.all_humans))
 
@@ -267,7 +269,8 @@ class THumanDatasetBatch(Dataset):
         """
 
         instance_idx = index // (self.poses_num * self.camera_view_num) if self.multi_person else 0
-        pose_index = ( index % (self.poses_num * self.camera_view_num) ) // self.camera_view_num * self.poses_interval + self.poses_start
+        pose_index = ( index % (self.poses_num * self.camera_view_num) ) // self.camera_view_num 
+        #* self.poses_interval + self.poses_start
         view_index = index % self.camera_view_num
 
         self.data_root = self.all_humans[instance_idx]
@@ -336,10 +339,15 @@ class THumanDatasetBatch(Dataset):
             elif self.fix_obs_view:
                 self.obs_view_index = 12
 
+        if self.obs_pose_index is not None:
+            obs_pose_index = int(self.obs_pose_index)
+        else:
+            obs_pose_index = pose_index
+
         # Load image, mask, K, D, R, T in observation space
-        obs_img_path = os.path.join(self.data_root, self.ims[pose_index][self.obs_view_index].replace('\\', '/'))
+        obs_img_path = os.path.join(self.data_root, self.ims[obs_pose_index][self.obs_view_index].replace('\\', '/'))
         obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
-        obs_msk = np.array(self.get_mask(pose_index, self.obs_view_index)) / 255.
+        obs_msk = np.array(self.get_mask(obs_pose_index, self.obs_view_index)) / 255.
         obs_img[obs_msk == 0] = 1 if self.white_back else 0
 
         obs_K = np.array(self.cams['K'][self.obs_view_index])
@@ -357,9 +365,16 @@ class THumanDatasetBatch(Dataset):
 
         obs_img = np.transpose(obs_img, (2,0,1))
 
+        # Prepare smpl in the observation space
+        # i: the pose index of all poses this person has, not the pose index of getitem input
+        obs_i = int(os.path.basename(obs_img_path)[:-4])
+        _, obs_vertices, obs_params = self.prepare_input(obs_i)
+        obs_params = {'poses': np.squeeze(np.expand_dims(obs_params['poses'].astype(np.float32), axis=0), axis=-1),
+            'R': obs_params['R'].astype(np.float32),
+            'Th': obs_params['Th'].astype(np.float32),
+            'shapes': np.expand_dims(obs_params['shapes'].astype(np.float32), axis=0)}
+
         # obs view
-        obs_vertices = vertices.copy()
-        obs_params = params.copy()
         obs_img_all.append(obs_img)
         obs_K_all.append(obs_K)
         obs_R_all.append(obs_R)
@@ -383,7 +398,7 @@ class THumanDatasetBatch(Dataset):
 
         ret = {
             "instance_idx": instance_idx, # person instance idx
-            'pose_index': pose_index, # pose_index in selected poses
+            'pose_index': pose_index * self.poses_interval + self.poses_start, # pose_index in selected poses
 
             # canonical space
             't_params': self.big_pose_params,

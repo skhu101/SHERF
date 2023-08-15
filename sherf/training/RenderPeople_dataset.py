@@ -175,8 +175,7 @@ class RenderPeopleDatasetBatch(Dataset):
             self.cams_all.append(camera)
 
         # prepare t pose and vertex
-        # self.smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL_renderpeople.pkl')
-        self.smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL.pkl')
+        self.smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL_renderpeople.pkl')
         self.big_pose_params = self.big_pose_params()
         t_vertices, _ = self.smpl_model(self.big_pose_params['poses'], self.big_pose_params['shapes'].reshape(-1))
         self.t_vertices = t_vertices.astype(np.float32)
@@ -311,9 +310,14 @@ class RenderPeopleDatasetBatch(Dataset):
             elif self.fix_obs_view:
                 self.obs_view_index = 0
 
+        if self.obs_pose_index is not None:
+            obs_pose_index = int(self.obs_pose_index)
+        else:
+            obs_pose_index = pose_index
+
         # Load image, mask, K, R, T in observation space
-        obs_img_path = os.path.join(self.data_root, 'img', 'camera'+str(self.obs_view_index).zfill(4), str(pose_index).zfill(4)+'.jpg')            
-        obs_mask_path = os.path.join(self.data_root, 'mask', 'camera'+str(self.obs_view_index).zfill(4), str(pose_index).zfill(4)+'.png')    
+        obs_img_path = os.path.join(self.data_root, 'img', 'camera'+str(self.obs_view_index).zfill(4), str(obs_pose_index).zfill(4)+'.jpg')            
+        obs_mask_path = os.path.join(self.data_root, 'mask', 'camera'+str(self.obs_view_index).zfill(4), str(obs_pose_index).zfill(4)+'.png')    
         obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
         obs_msk = np.array(self.get_mask(obs_mask_path)) / 255.
         obs_img[obs_msk == 0] = 1 if self.white_back else 0
@@ -330,9 +334,10 @@ class RenderPeopleDatasetBatch(Dataset):
 
         obs_img = np.transpose(obs_img, (2,0,1))
 
+        # Prepare smpl in observation space
+        _, obs_vertices, obs_params = self.prepare_input(smpl_path, obs_pose_index)
+
         # obs view
-        obs_vertices = vertices.copy()
-        obs_params = params.copy()
         obs_img_all.append(obs_img)
         obs_K_all.append(obs_K)
         obs_R_all.append(obs_R)

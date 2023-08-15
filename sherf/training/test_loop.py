@@ -90,7 +90,6 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     batch_size = 1
     humans_data_root = os.path.dirname(data_root)
 
-
     ## novel view synthesis evaluation with obs image from the same pose
     pose_start = nv_pose_start # 0 
     pose_interval = 2
@@ -113,6 +112,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     elif dataset_name == 'HuMMan':
         class_name = 'training.HuMMan_dataset.HuMManDatasetBatch'
         image_scaling=1/3
+        # with open(humans_list) as f:
+        #     humans_name = f.readlines()[317:339]
         humans_name = [
             'p000455_a000986',
             'p000456_a000396',
@@ -140,6 +141,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     elif dataset_name == 'zju_mocap':
         class_name = 'training.NeuBody_dataset.NeuBodyDatasetBatch'
         image_scaling=0.5
+        # with open(humans_list) as f:
+        #     humans_name = f.readlines()[317:339]
         humans_name = [
             "CoreView_377", 
             "CoreView_313", 
@@ -172,7 +175,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
             lpips_sub_view = []
 
             for k, test_data in enumerate(test_loader):
-                
+
                 if k == obs_view or k % data_interval != 0:
                     continue
 
@@ -197,17 +200,19 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     gt_rgb8 = to8b(gt_img.cpu().numpy())
                     rgb8 = np.concatenate([rgb8, gt_rgb8], axis=1)
 
-                    filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][0]), int(test_data['pose_index'][0]), view_id))
+                    filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j]), int(test_data['pose_index'][j]), view_id))
 
                     input_img = test_data['obs_img_all'][0,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
-                    input_img = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
 
                     img = rgb8
-                    img = np.concatenate([input_img, img], axis=0)
+                    img = np.concatenate([input_img_resize, img], axis=0)
                     imageio.imwrite(filename, to8b(img/255.))
 
+                    input_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_input.png'.format(int(test_data['pose_index'][j]), view_id))
                     gt_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_gt.png'.format(int(test_data['pose_index'][j]), view_id))
                     pred_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}.png'.format(int(test_data['pose_index'][j]), view_id))
+                    imageio.imwrite(input_filename, to8b(input_img/255.))
                     imageio.imwrite(gt_filename, to8b(gt_img.cpu().numpy()))
                     imageio.imwrite(pred_filename, to8b(img_pred.cpu().numpy()))
 
@@ -295,17 +300,19 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     gt_rgb8 = to8b(gt_img.cpu().numpy())
                     rgb8 = np.concatenate([rgb8, gt_rgb8], axis=1)
 
-                    filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j]), int(test_data['pose_index'][j]), view_id))
+                    filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_set.obs_pose_index), int(test_data['pose_index'][j]), view_id))
 
                     input_img = test_data['obs_img_all'][j,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
-                    input_img = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
 
                     img = rgb8
-                    img = np.concatenate([input_img, img], axis=0)
+                    img = np.concatenate([input_img_resize, img], axis=0)
                     imageio.imwrite(filename, to8b(img/255.))
 
+                    input_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_input.png'.format(int(test_set.obs_pose_index), int(test_set.obs_view_index)))
                     gt_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}_gt.png'.format(int(test_data['pose_index'][j]), view_id))
                     pred_filename = os.path.join(savedir_human, 'frame{:04d}_view{:04d}.png'.format(int(test_data['pose_index'][j]), view_id))
+                    imageio.imwrite(input_filename, to8b(input_img/255.))
                     imageio.imwrite(gt_filename, to8b(gt_img.cpu().numpy()))
                     imageio.imwrite(pred_filename, to8b(img_pred.cpu().numpy()))
 
