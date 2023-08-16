@@ -85,6 +85,11 @@ Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the d
 └── assets/
     ├── SMPL_NEUTRAL.pkl
 ```
+
+```bash
+cd sherf
+```
+
 ### Inference code with RenderPeople dataset
 ```bash
 bash eval_renderpeople_512x512.sh
