@@ -103,7 +103,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         class_name = 'training.RenderPeople_dataset.RenderPeopleDatasetBatch'
         image_scaling=neural_rendering_resolution/512
         with open(humans_list) as f:
-            humans_name = f.readlines()[450:480]
+            humans_name = f.readlines()[450:452]#[450:480]
     elif dataset_name == 'THuman':
         class_name = 'training.THuman_dataset.THumanDatasetBatch'
         image_scaling=neural_rendering_resolution/512
@@ -176,10 +176,11 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
 
             for k, test_data in enumerate(test_loader):
 
-                if k == obs_view or k % data_interval != 0:
+                view_id = k % test_set.camera_view_num
+
+                if view_id == obs_view or view_id % data_interval != 0:
                     continue
 
-                view_id = k % test_set.camera_view_num
                 print("novel view subject: ", human_name, " obs_view: ", obs_view)
 
                 test_data = to_cuda(device, test_data)
@@ -276,10 +277,11 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
 
             for k, test_data in enumerate(test_loader):
 
-                if test_data['pose_index'][0] == np_pose_start or k % data_interval != 0:
+                view_id = k % test_set.camera_view_num
+
+                if test_data['pose_index'][0] == np_pose_start or view_id % data_interval != 0:
                     continue
 
-                view_id = k % test_set.camera_view_num
                 print("novel pose subject: ", human_name, " obs_view: ", obs_view)
 
                 test_data = to_cuda(device, test_data)
