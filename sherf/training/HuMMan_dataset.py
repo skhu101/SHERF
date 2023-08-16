@@ -11,9 +11,7 @@ import json
 from random import sample
 from smpl.smpl_numpy import SMPL
 
-import torch
 import random
-from mmhuman3d.data.data_structures import smc_reader
 
 
 def get_rays(H, W, K, R, T):

@@ -161,6 +161,10 @@ class NeuBodyDatasetBatch(Dataset):
         self.poses_interval = poses_interval # interval 1
         self.poses_num = poses_num # number of used poses 30
 
+        # observation pose and view
+        self.obs_pose_index = None
+        self.obs_view_index = None
+
         ann_file = os.path.join(data_root, 'annots.npy')
         annots = np.load(ann_file, allow_pickle=True).item()
         self.cams = annots['cams']
