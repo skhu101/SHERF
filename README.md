@@ -105,7 +105,8 @@ bash eval_THuman_512x512.sh
 bash eval_HuMMan_640x360.sh
 ```
 
-## Train SHERF
+
+## :train: Training
 <!-- --- -->
 
 ```bash
