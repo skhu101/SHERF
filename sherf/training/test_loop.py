@@ -103,7 +103,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         class_name = 'training.RenderPeople_dataset.RenderPeopleDatasetBatch'
         image_scaling=neural_rendering_resolution/512
         with open(humans_list) as f:
-            humans_name = f.readlines()[450:452]#[450:480]
+            humans_name = f.readlines()[450:480]
     elif dataset_name == 'THuman':
         class_name = 'training.THuman_dataset.THumanDatasetBatch'
         image_scaling=neural_rendering_resolution/512
