@@ -69,12 +69,13 @@ Please follow instructions of [HuMMan-Recon](https://caizhongang.github.io/proje
 
 Please follow instructions of [Neural Body](https://github.com/zju3dv/neuralbody) to download the ZJU-Mocap dataset.
 
-## Train SHERF
-<!-- --- -->
+## :running_woman: Inference
 
-```bash
-cd sherf
-```
+### Download Models
+
+The pretrained models and SMPL model are needed for inference.
+
+The pretrained models are put in [Google Drive](https://drive.google.com/file/d/1gqPu-ug46P4EUOqQDtysWIpcihj6I_Oe/view?usp=sharing) and [Baidu Pan (pin:pcd2)](https://pan.baidu.com/s/11Mj94iEDotLWSd53_DAa8g) for downloading.
 
 Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the downloaded models in the folder smpl_models. Only the neutral one is needed. The folder structure should look like
 
@@ -83,6 +84,27 @@ Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the d
 ├── ...
 └── assets/
     ├── SMPL_NEUTRAL.pkl
+```
+### Inference code with RenderPeople dataset
+```bash
+bash eval_renderpeople_512x512.sh
+```
+
+### Inference code with THuman dataset
+```bash
+bash eval_THuman_512x512.sh
+```
+
+### Inference code with HuMMan dataset
+```bash
+bash eval_HuMMan_640x360.sh
+```
+
+## Train SHERF
+<!-- --- -->
+
+```bash
+cd sherf
 ```
 
 ### Training code with RenderPeople dataset
