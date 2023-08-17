@@ -103,7 +103,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
         class_name = 'training.RenderPeople_dataset.RenderPeopleDatasetBatch'
         image_scaling=neural_rendering_resolution/512
         with open(humans_list) as f:
-            humans_name = f.readlines()[450:452]#[450:480]
+            humans_name = f.readlines()[450:480]
     elif dataset_name == 'THuman':
         class_name = 'training.THuman_dataset.THumanDatasetBatch'
         image_scaling=neural_rendering_resolution/512
@@ -204,7 +204,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j]), int(test_data['pose_index'][j]), view_id))
 
                     input_img = test_data['obs_img_all'][0,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
-                    input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    # input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    input_img_resize = cv2.resize(input_img, (2*W, H))
 
                     img = rgb8
                     img = np.concatenate([input_img_resize, img], axis=0)
@@ -305,7 +306,8 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_set.obs_pose_index), int(test_data['pose_index'][j]), view_id))
 
                     input_img = test_data['obs_img_all'][j,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
-                    input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    # input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
+                    input_img_resize = cv2.resize(input_img, (2*W, H))
 
                     img = rgb8
                     img = np.concatenate([input_img_resize, img], axis=0)
