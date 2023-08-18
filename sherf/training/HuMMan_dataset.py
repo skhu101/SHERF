@@ -187,10 +187,6 @@ class HuMManDatasetBatch(Dataset):
             camera = json.load(open(camera_file))
             self.cams_all.append(camera)
 
-        # observation pose and view
-        self.obs_pose_index = None
-        self.obs_view_index = None
-
         # prepare t pose and vertex
         self.smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL.pkl')
         self.big_pose_params = self.big_pose_params()
