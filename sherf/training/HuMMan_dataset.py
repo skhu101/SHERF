@@ -187,6 +187,10 @@ class HuMManDatasetBatch(Dataset):
             camera = json.load(open(camera_file))
             self.cams_all.append(camera)
 
+        # observation pose and view
+        self.obs_pose_index = None
+        self.obs_view_index = None
+
         # prepare t pose and vertex
         self.smpl_model = SMPL(sex='neutral', model_dir='assets/SMPL_NEUTRAL.pkl')
         self.big_pose_params = self.big_pose_params()
@@ -329,7 +333,7 @@ class HuMManDatasetBatch(Dataset):
             if self.sample_obs_view:
                 self.obs_view_index = np.random.randint(self.camera_view_num)
             elif self.fix_obs_view:
-                obs_view_index = 0
+                self.obs_view_index = 0
 
         if self.obs_pose_index is not None:
             obs_pose_index = int(self.obs_pose_index)
@@ -337,15 +341,15 @@ class HuMManDatasetBatch(Dataset):
             obs_pose_index = pose_index
 
         # Load image, mask, K, R, T in observation space
-        obs_img_path = os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')            
-        obs_mask_path = os.path.join(self.data_root, 'kinect_mask', 'kinect_'+str(obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')
+        obs_img_path = os.path.join(self.data_root, 'kinect_color', 'kinect_'+str(self.obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')            
+        obs_mask_path = os.path.join(self.data_root, 'kinect_mask', 'kinect_'+str(self.obs_view_index).zfill(3), str(obs_pose_index).zfill(6)+'.png')
         obs_img = np.array(imageio.imread(obs_img_path).astype(np.float32) / 255.)
         obs_msk = np.array(self.get_mask(obs_mask_path)) / 255.
         obs_img[obs_msk == 0] = 1 if self.white_back else 0
 
-        obs_K = np.array(self.cams[f'kinect_color_{str(obs_view_index).zfill(3)}']['K'])
-        obs_R = np.array(self.cams[f'kinect_color_{str(obs_view_index).zfill(3)}']['R'])
-        obs_T = np.array(self.cams[f'kinect_color_{str(obs_view_index).zfill(3)}']['T']).reshape(-1, 1)
+        obs_K = np.array(self.cams[f'kinect_color_{str(self.obs_view_index).zfill(3)}']['K'])
+        obs_R = np.array(self.cams[f'kinect_color_{str(self.obs_view_index).zfill(3)}']['R'])
+        obs_T = np.array(self.cams[f'kinect_color_{str(self.obs_view_index).zfill(3)}']['T']).reshape(-1, 1)
 
         # rescaling
         if self.image_scaling != 1:

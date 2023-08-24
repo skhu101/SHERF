@@ -112,6 +112,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
     elif dataset_name == 'HuMMan':
         class_name = 'training.HuMMan_dataset.HuMManDatasetBatch'
         image_scaling=1/3
+        data_interval=1
         # with open(humans_list) as f:
         #     humans_name = f.readlines()[317:339]
         humans_name = [
@@ -204,7 +205,6 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     filename = os.path.join(savedir_human, '{:02d}_{:02d}_{:02d}.png'.format(int(test_data['pose_index'][j]), int(test_data['pose_index'][j]), view_id))
 
                     input_img = test_data['obs_img_all'][0,0].cpu().numpy().transpose(1,2,0).reshape(H, -1, 3) * 255. #NCHW->HNWC
-                    # input_img_resize = cv2.resize(input_img, (H*2, int(input_img.shape[0] * W*2 / input_img.shape[1])))
                     input_img_resize = cv2.resize(input_img, (2*W, H))
 
                     img = rgb8
