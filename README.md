@@ -55,7 +55,7 @@ We recommend using anaconda to manage the python environments.
 <!-- --- -->
 
 #### RenderPeople Dataset
-We are preparing the rendered multi-view images of RenderPeople dataset and will release it soon.
+Please download rendered multi-view images of RenderPeople dataset from [OneDrive](https://mycuhk-my.sharepoint.com/:f:/g/personal/1155098117_link_cuhk_edu_hk/ElL9IDDOaa5Hl785gvbqyEEB8ubdobyuMKqoDY3J85XStw?e=o2BUOt).
 
 #### THuman Dataset
 
@@ -75,7 +75,7 @@ Please follow instructions of [Neural Body](https://github.com/zju3dv/neuralbody
 
 The pretrained models and SMPL model are needed for inference.
 
-The pretrained models are put in [Google Drive](https://drive.google.com/file/d/1gqPu-ug46P4EUOqQDtysWIpcihj6I_Oe/view?usp=sharing) and [Baidu Pan (pin:pcd2)](https://pan.baidu.com/s/11Mj94iEDotLWSd53_DAa8g) for downloading.
+The pretrained models are put in [OneDrive](https://mycuhk-my.sharepoint.com/:u:/g/personal/1155098117_link_cuhk_edu_hk/EX3z6WaWvRlAjQERUaNgGWIBcHsy8bnD74lCoCqT4Fuw6Q?e=IlVKmb) and [Baidu Pan (pin:gu1q)](https://pan.baidu.com/s/1yqZd0L1zAoc-YUY4YCD4dQ) for downloading.
 
 Register and download SMPL models [here](https://smpl.is.tue.mpg.de/). Put the downloaded models in the folder smpl_models. Only the neutral one is needed. The folder structure should look like
 

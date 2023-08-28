@@ -223,7 +223,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
                     psnr = round(mse2psnr(test_loss).item(), 3)
                     ssim, lpips = ssim_metric(img_pred[mask_at_box[j]].cpu().numpy(), gt_img[mask_at_box[j]].cpu().numpy(), mask_at_box[j].cpu().numpy(), mask_at_box[j].shape[0], mask_at_box[j].shape[1])
 
-                    print("[Test] ", "Source:", int(test_data['pose_index'][j]), " Target:", int(test_data['pose_index'][j]), " View:", view_id, " Loss:", round(test_loss.item(), 5), " PSNR:", {psnr}, " SSIM: ", {round(ssim, 3)}, " LPIPS: ", {round(lpips, 3)})
+                    print("[Test] ", "Source pose:", int(test_data['pose_index'][j]), " Target pose:", int(test_data['pose_index'][j]), " View:", view_id, " Loss:", round(test_loss.item(), 5), " PSNR:", {psnr}, " SSIM: ", {round(ssim, 3)}, " LPIPS: ", {round(lpips, 3)})
                     
                     psnr_sub_view.append(psnr)
                     ssim_sub_view.append(ssim)
@@ -326,7 +326,7 @@ def test(model, savedir=None, neural_rendering_resolution=128, rank=0, use_sr_mo
 
                     ssim, lpips = ssim_metric(img_pred[mask_at_box[j]].cpu().numpy(), gt_img[mask_at_box[j]].cpu().numpy(), mask_at_box[j].cpu().numpy(), mask_at_box[j].shape[0], mask_at_box[j].shape[1])
 
-                    print("[Test] ", "Source:", test_set.obs_pose_index, " Target:", int(test_data['pose_index'][j]), " View:", view_id, \
+                    print("[Test] ", "Source pose:", test_set.obs_pose_index, " Target pose:", int(test_data['pose_index'][j]), " View:", view_id, \
                         " Loss:", round(test_loss.item(), 5), " PSNR:", {psnr}, " SSIM: ", {round(ssim, 3)}, " LPIPS: ", {round(lpips, 3)})
                     
                     psnr_sub_view.append(psnr)
