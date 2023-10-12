@@ -256,7 +256,7 @@ class NeuBodyDatasetBatch(Dataset):
 
         big_pose_params = {}
         # big_pose_params = copy.deepcopy(params)
-        big_pose_params['R'] = np.zeros((3,3)).astype(np.float32)
+        big_pose_params['R'] = np.eye(3).astype(np.float32)
         big_pose_params['Th'] = np.zeros((1,3)).astype(np.float32)
         big_pose_params['shapes'] = np.zeros((1,10)).astype(np.float32)
         big_pose_params['poses'] = np.zeros((1,72)).astype(np.float32)
