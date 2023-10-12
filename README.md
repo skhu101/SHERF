@@ -69,6 +69,8 @@ Please follow instructions of [HuMMan-Recon](https://caizhongang.github.io/proje
 
 Please follow instructions of [Neural Body](https://github.com/zju3dv/neuralbody) to download the ZJU-Mocap dataset.
 
+Tips: If you hope to learn how to render multi-view images, You may refer to [XRFeitoria](https://github.com/openxrlab/xrfeitoria), a rendering toolbox for generating synthetic data photorealistic with ground-truth annotations.
+
 ## :running_woman: Inference
 
 ### Download Models
