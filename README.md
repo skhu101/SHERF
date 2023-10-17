@@ -59,7 +59,7 @@ Please download our rendered multi-view images of RenderPeople dataset from [One
 
 #### THuman Dataset
 
-Please follow instructions of [MPS-NeRF](https://github.com/gaoxiangjun/MPS-NeRF) and [DeepHuman](http://www.liuyebin.com/deephuman/deephuman.html) to download the THuman dataset.
+Please follow instructions of [MPS-NeRF](https://github.com/gaoxiangjun/MPS-NeRF) to download the [THuman](http://www.liuyebin.com/deephuman/deephuman.html) dataset.
 
 #### HuMMan Dataset
 
