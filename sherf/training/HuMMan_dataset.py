@@ -357,15 +357,6 @@ class HuMManDatasetBatch(Dataset):
             obs_msk = cv2.resize(obs_msk, (W, H), interpolation=cv2.INTER_NEAREST)
             obs_K[:2] = obs_K[:2]*self.image_scaling
 
-        obs_pose = np.concatenate([obs_R, obs_T], axis=1)
-        real_bounds = np.zeros_like(world_bounds)
-        real_bounds[0] = world_bounds[0] + 0.05
-        real_bounds[1] = world_bounds[1] - 0.05
-        obs_bound_mask = get_bound_2d_mask(real_bounds, obs_K, obs_pose, H, W)
-        mask_bkgd = True
-        if mask_bkgd:
-            obs_img[obs_bound_mask != 1] = 0 #1 if white_back else 0
-
         obs_img = np.transpose(obs_img, (2,0,1))
 
         # Prepare smpl in observation space
