@@ -55,7 +55,7 @@ We recommend using anaconda to manage the python environments.
 <!-- --- -->
 
 #### RenderPeople Dataset
-Please download our rendered multi-view images of RenderPeople dataset from [GoogleDrive](https://drive.google.com/file/d/1_Gjo6DjMyo3Kk7yWWF8ghWElS4gKDHjC/view?usp=drive_link).
+Please download our rendered multi-view images of RenderPeople dataset from [Google Drive](https://drive.google.com/file/d/1_Gjo6DjMyo3Kk7yWWF8ghWElS4gKDHjC/view?usp=drive_link).
 
 #### THuman Dataset
 
