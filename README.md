@@ -55,7 +55,7 @@ We recommend using anaconda to manage the python environments.
 <!-- --- -->
 
 #### RenderPeople Dataset
-Please download our rendered multi-view images of RenderPeople dataset from [Huggingface](hhttps://huggingface.co/datasets/skhu101/SHERF) or [Baidu Pan (pin:5hbj)](https://pan.baidu.com/s/1g5Ci-uqqM0Gjaa_aW1otKQ).
+Please download our rendered multi-view images of RenderPeople dataset from [Huggingface](https://huggingface.co/datasets/skhu101/SHERF) or [Baidu Pan (pin:5hbj)](https://pan.baidu.com/s/1g5Ci-uqqM0Gjaa_aW1otKQ).
 
 #### THuman Dataset
 
