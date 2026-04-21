@@ -59,7 +59,7 @@ Please download our rendered multi-view images of RenderPeople dataset from [Hug
 
 #### THuman Dataset
 
-Please follow instructions of [MPS-NeRF](https://github.com/gaoxiangjun/MPS-NeRF) to download the [THuman](http://www.liuyebin.com/deephuman/deephuman.html) dataset. After that, please download our estimated [SMPL Neutral parameters](https://mycuhk-my.sharepoint.com/:u:/g/personal/1155098117_link_cuhk_edu_hk/ESgPK9M9zNxPr3dqEAoao4gBsomBTbAakC4c6eCpNxGGZA?e=i9wZni).
+Please follow instructions of [MPS-NeRF](https://github.com/gaoxiangjun/MPS-NeRF) to download the [THuman](http://www.liuyebin.com/deephuman/deephuman.html) dataset. After that, please download our estimated [SMPL Neutral parameters](https://huggingface.co/skhu101/SHERF).
 
 #### HuMMan Dataset
 
